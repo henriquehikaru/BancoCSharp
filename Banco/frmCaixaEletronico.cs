@@ -16,15 +16,44 @@ namespace Banco
         public frmCaixaEletronico()
         {
             InitializeComponent();
+            conta.LimiteCredito = 1000;
             conta.Saldo = 5000;
+            AtualizaSaldoLimite();
+        }
+
+        private void AtualizaSaldoLimite()
+        {
+            numLimiteCredito.Value = conta.LimiteCredito;
             lblSaldo.Text = conta.Saldo.ToString("C");
+            lblSaldoLimite.Text = (conta.Saldo + conta.LimiteCredito).ToString("C");
         }
 
         private void btnSacar_Click(object sender, EventArgs e)
         {
-            conta.Sacar(numValorSaque.Value);
+            try
+            {
+                conta.Sacar(numValorSaque.Value);
+                lblSaldo.Text = conta.Saldo.ToString("C");
+                MessageBox.Show("Saque realizado com sucesso!", "Sucesso", MessageBoxButtons.OK);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocorreu um erro ao realizar o saque!" + "\n\nMais detalhes: " + ex.Message, "Erro ao Sacar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnDepositar_Click(object sender, EventArgs e)
+        {
+            conta.Depositar(numValorDeposito.Value);
             lblSaldo.Text = conta.Saldo.ToString("C");
-            MessageBox.Show("Saque Realizado com sucesso!");    
+            MessageBox.Show("Depósito realizado com sucesso!", "Sucesso", MessageBoxButtons.OK);
+
+        }
+
+        private void numLimiteCredito_Validating(object sender, CancelEventArgs e)
+        {
+            conta.LimiteCredito = numLimiteCredito.Value;
+            AtualizaSaldoLimite();
         }
     }
 }

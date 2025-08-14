@@ -8,11 +8,14 @@ namespace Banco
 {
     public class Conta
     {
+        private decimal contadorConta = 0;
+
         // Definição dos atributos internos da Classe
         private Int32 numero;
         private decimal limiteCredito;
         private decimal saldo;
-        private decimal contadorConta = 0;
+        private DateTime dataAbertura;
+        
 
         // Criação das propriedades da Classe referentes aos atributos internos
 
@@ -25,7 +28,7 @@ namespace Banco
         public decimal LimiteCredito
         {
             get { return limiteCredito; }
-            set { LimiteCredito = value; }
+            set { limiteCredito = value; }
         }
 
         public decimal Saldo
@@ -34,18 +37,31 @@ namespace Banco
             set { saldo = value; }
         }
 
+        public DateTime DataAbertura
+        {
+            get { return dataAbertura; }
+            set { dataAbertura = value; }
+        }
+
         // Criação dos métodos da Classe
 
         public void Sacar(decimal valor)
         {
             contadorConta++;
-            Saldo = Saldo - valor;
-
+            if (Saldo + LimiteCredito < valor)
+            {
+                throw new Exception("Saldo insuficiente para realizar o saque.");
+            }
+            else
+            {
+                Saldo = Saldo - valor;
+            }
         }
 
-        public void Depositar()
+        public void Depositar(decimal valor)
         {
-            Console.WriteLine("Depósito realizado com sucesso");
+            Saldo = Saldo + valor;
+
         }
 
         // Método construtor da Classe Conta
