@@ -40,6 +40,10 @@ namespace Banco
             {
                 MessageBox.Show("Ocorreu um erro ao realizar o saque!" + "\n\nMais detalhes: " + ex.Message, "Erro ao Sacar", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            finally
+            {
+                AtualizaSaldoLimite(); // Atualiza o saldo e limite após o saque
+            }
         }
 
         private void btnDepositar_Click(object sender, EventArgs e)

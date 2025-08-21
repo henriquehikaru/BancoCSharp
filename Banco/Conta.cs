@@ -31,6 +31,8 @@ namespace Banco
             set { limiteCredito = value; }
         }
 
+        
+
         public decimal Saldo
         {
             get { return saldo; }
@@ -55,6 +57,11 @@ namespace Banco
             else
             {
                 Saldo = Saldo - valor;
+            }
+
+            if (saldo > 0)
+            {
+                throw new Exception ("Atenção: Você está utilizando o limite de crédito da conta.");
             }
         }
 

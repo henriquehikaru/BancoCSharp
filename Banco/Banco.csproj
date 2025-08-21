@@ -53,6 +53,7 @@
     <Compile Include="frmCaixaEletronico.Designer.cs">
       <DependentUpon>frmCaixaEletronico.cs</DependentUpon>
     </Compile>
+    <Compile Include="Lancamento.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmCaixaEletronico.resx">
