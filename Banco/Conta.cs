@@ -67,10 +67,18 @@ namespace Banco
 
         public void Depositar(decimal valor)
         {
-            Saldo = Saldo + valor;
-
+            if (valor <= 0)
+                throw new Exception("O valor do depósito deve ser maior que zero.");
+            Saldo += valor;
         }
 
         // Método construtor da Classe Conta
+        public Conta()
+        {
+            Numero = 0;
+            LimiteCredito = 0;
+            Saldo = 0;
+            DataAbertura = DateTime.Now;
+        }
     }
 }
