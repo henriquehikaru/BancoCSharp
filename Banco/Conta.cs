@@ -59,7 +59,7 @@ namespace Banco
                 Saldo = Saldo - valor;
             }
 
-            if (saldo > 0)
+            if (saldo < 0)
             {
                 throw new Exception ("Atenção: Você está utilizando o limite de crédito da conta.");
             }
